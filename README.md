@@ -1,4 +1,4 @@
-# La-Z Ltrs
+# [La-Z Ltrs](https://soto-la-z-ltrs.herokuapp.com/)
 ![logo](https://github.com/rodolfosotojr/la-z-Ltrs/blob/master/readme-logo.jpeg?raw=true)      *..Speak your sentiments*
 
 ## What our app does
