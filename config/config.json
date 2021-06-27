@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
-    "database": "project2_db",
-    "host": "localhost",
+    "password": "",
+    "database": "lazltrs",
+    "host": "192.168.1.140",
     "dialect": "mysql"
   },
   "test": {
