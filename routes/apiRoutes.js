@@ -8,11 +8,11 @@ var isAuth = require("../config/passport/isAuth");
 module.exports = function (app) {
   // Register
   app.post("/api/register", function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     db.User.create(req.body).then(function () {
       res.redirect(307, "/api/login");
     }).catch(function (err) {
-      console.log(err);
+      console.log('***** REGISTRATION ERROR *****\n', err);
       res.json(err);
     });
   });
@@ -36,6 +36,8 @@ module.exports = function (app) {
       where: { userId: req.user.id }
     }).then(function (results) {
       // get firstname
+      console.log('***** SAVED ORDER RESULTS *****/', results);
+      console.log('UserID: ', req.user.id);
       return res.json(results);
     })
   })
@@ -77,12 +79,12 @@ module.exports = function (app) {
   app.post("/api/createorder", function (req, res) {
     // NEED TO ADD CURRENT USER ID!!!
     req.body.UserId = req.user.id;
-    console.log("******ORDER REQ.BODY*******\n ", req.body)
+    // console.log("******ORDER REQ.BODY*******\n ", req.body)
 
     db.Order.create(req.body).then(function () {
       res.redirect("/");
     }).catch(function (err) {
-      console.log(err);
+      console.log('***** SINGLE ORDER ERROR *****\n', err);
       res.json(err);
     });
 
@@ -121,7 +123,7 @@ module.exports = function (app) {
 
   // PUT route for updating Order Status
   app.put("/api/submitorder/:id", function (req, res) {
-    console.log("------------CHANGE ORDER STATUS--------------\n", req.body);
+    // console.log("------------CHANGE ORDER STATUS--------------\n", req.body);
     if (req.body.order_processed === "false") {
       req.body.order_processed = true
     }
@@ -143,7 +145,7 @@ module.exports = function (app) {
   app.delete("/api/order/:id", isAuth, function (req, res) {
     var orderId = req.params.id;
     var userId = req.user.id;
-    console.log(`----=====DELETE=====----\nCurrent User ID: ${userId}, Order userId: ${orderId}`);
+    // console.log(`----=====DELETE=====----\nCurrent User ID: ${userId}, Order userId: ${orderId}`);
 
     // FUTURE TODO- first check if current user id matches userId of the order
     db.Order.destroy({

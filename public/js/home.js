@@ -4,7 +4,7 @@ $(document).ready(function () {
   // get user info
   function getUserInfo() {
     $.get("/api/getuser").then(function(userdata) {
-      console.log(userdata);
+      // console.log(userdata);
       $("#firstname").html(userdata.firstname);
     })
   }
@@ -18,7 +18,8 @@ $(document).ready(function () {
     // show past orders
     $.ajax({ url: "/api/savedorders", method: "GET" })
       .then(function (savedorder) {
-        savedorder.forEach(function (item) {
+        savedorder.forEach((item) => {
+          console.log('**** SAVED ORDERS - ITEM **** \n', item)
           // var orderDate = moment(item.createdAt, moment.ISO_8601).format("MMM DD, YYYY hh:mm a");
           var orderDate = moment(item.updatedAt).local().format("MMM DD, YYYY hh:mm a");
           url = "https://api.handwrytten.com/v1/cards/view?card_id=" + item.card_id + "&lowres=1";
@@ -58,7 +59,8 @@ $(document).ready(function () {
     // show past orders
     $.ajax({ url: "/api/orderhistory", method: "GET" })
       .then(function (order) {
-        order.orders.forEach(function (item) {
+        console.log('**** ORDER HISTORY **** \n', order)
+        order.forEach((item) => {
           var orderDate = moment.unix(item.date_created).format("MMM DD, YYYY hh:mm a");
           row = `
         <tr>
